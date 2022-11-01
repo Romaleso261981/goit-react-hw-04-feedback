@@ -1,1 +1,1 @@
-# goit-react-hw-04-feedbackHuk
+# goit-react-hw-02-feedback
