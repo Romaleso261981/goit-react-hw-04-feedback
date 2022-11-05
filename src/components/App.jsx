@@ -11,21 +11,22 @@ export const App = () => {
   const [bad, setBad] = useState(0);
   const [total, setTotal] = useState(0);
   const [percentage, setPercentage] = useState(0);
-  const options = [1, 2, 3, 4, 5, 6, 7];
+  const options = ["good", "neutral", "bad"];
 
   useEffect(() => setTotal(total => total = good + neutral + bad), [bad, good, neutral, total]);
+console.log(good / total);
 
   useEffect(() => setPercentage(percentage => percentage = Math.round((good / total) * 100)),[good, total])
 
   const counterOfFeedback = option => {
     switch (option) {
-      case 1:
+      case "good":
         setGood(prevGood => prevGood + 1);
         break;
-      case 2:
+      case "neutral":
         setNeutral(prevNeutral => prevNeutral + 1);
         break;
-      case 3:
+      case "bad":
         setBad(prevBad => prevBad + 1);
         break;
 
@@ -43,7 +44,7 @@ export const App = () => {
       </SectionWrap>
       <SectionInfo>
         <Section title={'Statistics'}>
-          {true > 0 ? (
+          {total > 0 ? (
             <Statistics
               good={good}
               neutral={neutral}
