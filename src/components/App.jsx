@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Section from './Section/Section';
 import Notification from './Notification/Notification';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
@@ -9,24 +9,20 @@ export const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [percentage, setPercentage] = useState(0);
-  const options = ["good", "neutral", "bad"];
+  const options = Object.keys({good, neutral, bad});
 
-  useEffect(() => setTotal(total => total = good + neutral + bad), [bad, good, neutral, total]);
-console.log(good / total);
-
-  useEffect(() => setPercentage(percentage => percentage = Math.round((good / total) * 100)),[good, total])
+  const total = good + neutral + bad;
+  const percentage = total ? Math.round((good / total) * 100) : 0;
 
   const counterOfFeedback = option => {
     switch (option) {
-      case "good":
+      case 'good':
         setGood(prevGood => prevGood + 1);
         break;
-      case "neutral":
+      case 'neutral':
         setNeutral(prevNeutral => prevNeutral + 1);
         break;
-      case "bad":
+      case 'bad':
         setBad(prevBad => prevBad + 1);
         break;
 
@@ -62,4 +58,3 @@ console.log(good / total);
 };
 
 export default App;
-
